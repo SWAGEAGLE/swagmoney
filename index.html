@@ -6,9 +6,10 @@
         <title>Computing Science 309 Warehouse Wars</title>
         <script language="javascript" src="jquery-3.1.1.min.js" > </script>
         <script language="javascript" src="ww.js" ></script>
-        <script language="javascript" src="log.js"></script> 
+        <script language="javascript" src="new.js"></script> 
 
         <script> 
+
             stage=null;
             // SOME GLUE CODE CONNECTING THIS PAGE TO THE STAGE
             interval=null;
@@ -30,30 +31,33 @@
             $(function(){
                 //setupGame();
                 //startGame();
-               
+                toggleLogin(setupGame,startGame);
+
+
             });
+
 
         </script>
     </head>
+  
     <body>
+
        
         <div name="login" id="login" style="display:">
-        <h2>Login Form</h2>
-        <form method="post" name="logForm" onsubmit="toggleVisibility('login'); return false;">
-           
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <h2>Login Form</h2>
+            <form method="post" name="logForm">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+                <br/><br/>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required> 
+                <br/><br/>          
+                <input type="submit" id='test' name="submit" value="Login"/>       
 
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-                        
-            <input type="submit" name="submit" value="Login"/>       
-        </form>
+            </form>
         </div>
 
-        <div id="ok" style="display:none">
-            ok
-        </div>
+        
 
 
         <div id="game" style="display:none">
@@ -88,9 +92,7 @@
                     max-width: 100%;
                     height: auto;
                     width: auto;
-
                 }
-
             </style>
             <body bgcolor="ffffff">
                 <center>
