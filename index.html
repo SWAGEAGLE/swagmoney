@@ -18,6 +18,7 @@
                 stage.initialize();
 
 
+
             }
             function startGame(){
                 // YOUR CODE GOES HERE
@@ -41,19 +42,44 @@
     </head>
   
     <body>
-
-       
+        <!-- Login form-->
         <div name="login" id="login" style="display:">
             <h2>Login Form</h2>
             <form method="post" name="logForm">
                 <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="uname"/>
                 <br/><br/>
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required> 
+                <input type="password" placeholder="Enter Password" name="psw"/> 
                 <br/><br/>          
-                <input type="submit" id='test' name="submit" value="Login"/>       
+                <button type="submit" id='log' name="submit">Login</button>  
+                <button type="submit" id='reg' name="submit">Register</button>
+                
+            </form>
+        </div>
 
+        <!-- Registration form-->
+        <div name="register" id="register" style="display:none">
+            <h2>Registration Form</h2>
+            <form method="post" name="regForm">
+                <label><b>First Name</b></label>
+                <input type="text" placeholder="First Name" name="fname"/> 
+                <br/><br/>
+                <label><b>Last Name</b></label>
+                <input type="text" placeholder="Last Name" name="lname"/> 
+                <br/><br/>
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="regUname"/>
+                <br/><br/>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="regPsw"/> 
+                <br/><br/>
+                <label><b>Email</b></label>
+                <input type="email" placeholder="Enter Email" name="email"/> 
+                <br/><br/>        
+                <button type="submit" id='backLog' name="submit">Back</button>  
+                <button type="submit" id='toGame' name="submit">Next</button>
+                
             </form>
         </div>
 
@@ -123,17 +149,17 @@
                                     <table class="controls">
                                         <tr>
                                             <td><img src="icons/north_west.svg"  onclick = "stage.playeraction('NW')" /></td>
-                                            <td><img src="icons/north.svg" onclick = "stage.playeraction('N')" ></td>
+                                            <td><a class="up"><img src="icons/north.svg" onclick = "stage.playeraction('N')" ></td>
                                             <td><img src="icons/north_east.svg"  onclick = "stage.playeraction('NE')" /></td>
                                         </tr>
                                         <tr>
-                                            <td><img src="icons/west.svg"  onclick = "stage.playeraction('W')" /></td>
+                                            <td><a class="left"><img src="icons/west.svg"  onclick = "stage.playeraction('W')" /></td>
                                             <td>&nbsp;</td>
-                                            <td><img src="icons/east.svg "   onclick = "stage.playeraction('E')"/></td>
+                                            <td><a class="right"><img src="icons/east.svg "   onclick = "stage.playeraction('E')"/></td>
                                         </tr>
                                         <tr>
                                             <td><img src="icons/south_west.svg"  onclick = "stage.playeraction('SW')"/></td>
-                                            <td><img src="icons/south.svg"  onclick = "stage.playeraction('S')" /></td>
+                                            <td><a class="down"><img src="icons/south.svg"  onclick = "stage.playeraction('S')" /></td>
                                             <td><img src="icons/south_east.svg"  onclick = "stage.playeraction('SE')" /></td>
                                         </tr>
                                     </table>

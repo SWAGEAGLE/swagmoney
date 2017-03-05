@@ -143,7 +143,9 @@ Stage.prototype.setImage=function(x, y, src){
     
     $('.table tr:eq('.concat(x-1,')',' td:eq(',y-1,') img')).attr('src',src);
 }
-
+Stage.prototype.randNum=function(){
+    return Math.random() * (5 - 1) + 1;
+}
 // Take one step in the animation of the game.  
 Stage.prototype.step=function(){
     for(var i=0;i<this.actors.length;i++){
@@ -315,6 +317,26 @@ Stage.prototype.playeraction = function(direction){
     }
 
 
+    
+
+
 }
+/*
+//not working (keyboard navigation..trying to implement so that we don't have repeating code)
+Stage.prototype.keysaction=function (e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '37') {
+        var actor = this.getActor(this.player.x ,this.player.y - 1);
+            if(actor == null)
+                this.move(this.player,0,-1,this.playerImageSrc);
+            else if(actor.name == 'box')
+                if(this.movebox(actor,0,-1))
+                    this.move(this.player,0,-1,this.playerImageSrc);;
+            break;
+    }
+}
+*/
 // End Class Stage
 
