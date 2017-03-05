@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+<!--
+<script type="text/javascript">
+ function showHide() {
+   var div = document.getElementById("hidden_div");
+   if (div.style.display == 'none') {
+     div.style.display = '';
+   }
+   else {
+     div.style.display = 'none';
+   }
+ }
+</script>
+-->
+<script language="javascript" src="test.js"></script>
+</head>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<!--<script language="JavaScript">
+    function toggleVisibility(x){
+        var y = document.getElementById(x); 
+        if (y.style.visibility=="hidden"){
+            y.style.visibility="visible";
+            }
+        else {
+            y.style.visibility="hidden";
+            }
+        }
+</script>-->
+
+</head>
+
+<body>
+<div name="test" id="test" style="background-color:#9966FF; padding:10px;">
+    <p>Test Div</p>
+</div>
+<form method="post" onsubmit="toggleVisibility('test'); return false;">
+    <input type="submit" name="sub" value="Enter" />
+</form>  
+</body>
+
+</html>
