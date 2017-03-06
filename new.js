@@ -4,6 +4,9 @@ function toggleLogin(setup,start){
         	e.preventDefault();
             if (logValidate() != false){
 	        	//new
+	        	//let username = $('#uname').val();
+	        	//let password = $('#psw').val();
+	        	//putAccountDetails(username,password);
 	            $('#login').hide();
 	            setup();
 	            start();
@@ -35,6 +38,7 @@ function showHideLog(setup,start){
         	e.preventDefault();
             if (regValidate() != false){
 	        	//new
+	        	registerRequest();
 	            $('#register').hide()
 	            setup();
 	            start();
@@ -90,3 +94,25 @@ function regValidate(){
 
 }
 
+function putAccountDetails(username,password){
+	var message = {
+		user : username,
+		pass: password
+	};
+	$.getJSON("api/api.php",message, function(data){
+		if(data['status'] == 'ok'){
+			alert('heeee');
+		}
+	})
+}
+
+function registerRequest(){
+	var params = { 
+	method: "POST", 
+	url: "api/api.php", 
+	data: { "fname": $("#fname").val() , "lname" : $("#lname").val(), "username" : $("#username").val(),
+			"passwd" : $("#passwd").val(), "email" : $("#email").val() } 
+	};
+	$.ajax(params);
+
+}

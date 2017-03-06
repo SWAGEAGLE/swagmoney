@@ -16,9 +16,6 @@
             function setupGame(go){
                 stage=new Stage(20,20,"stage");
                 stage.initialize();
-
-
-
             }
             function startGame(){
                 // YOUR CODE GOES HERE
@@ -26,7 +23,6 @@
                 document.onkeydown = function(e){
                     stage.keysaction(e);
                 }
-                
             }
             function pauseGame(){
                 // YOUR CODE GOES HERE
@@ -37,8 +33,6 @@
                 //setupGame();
                 //startGame();
                 toggleLogin(setupGame,startGame);
-
-
             });
 
 
@@ -51,10 +45,10 @@
             <h2>Login Form</h2>
             <form method="post" name="logForm">
                 <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname"/>
+                <input type="text" id = "uname" placeholder="Enter Username" name="uname"/>
                 <br/><br/>
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw"/> 
+                <input type="password" id = "psw" placeholder="Enter Password" name="psw"/> 
                 <br/><br/>          
                 <button type="submit" id='log' name="submit">Login</button>  
                 <button type="submit" id='reg' name="submit">Register</button>
@@ -67,19 +61,19 @@
             <h2>Registration Form</h2>
             <form method="post" name="regForm">
                 <label><b>First Name</b></label>
-                <input type="text" placeholder="First Name" name="fname"/> 
+                <input type="text" id="fname" placeholder="First Name" name="fname"/> 
                 <br/><br/>
                 <label><b>Last Name</b></label>
-                <input type="text" placeholder="Last Name" name="lname"/> 
+                <input type="text" id ="lname" placeholder="Last Name" name="lname"/> 
                 <br/><br/>
                 <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="regUname"/>
+                <input type="text" id = "username" placeholder="Enter Username" name="regUname"/>
                 <br/><br/>
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="regPsw"/> 
+                <input type="password" id = "passwd" placeholder="Enter Password" name="regPsw"/> 
                 <br/><br/>
                 <label><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email"/> 
+                <input type="email" id = "email" placeholder="Enter Email" name="email"/> 
                 <br/><br/>        
                 <button type="submit" id='backLog' name="submit">Back</button>  
                 <button type="submit" id='toGame' name="submit">Next</button>

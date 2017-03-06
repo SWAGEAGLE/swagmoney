@@ -144,14 +144,14 @@ Stage.prototype.setImage=function(x, y, src){
     $('.table tr:eq('.concat(x-1,')',' td:eq(',y-1,') img')).attr('src',src);
 }
 Stage.prototype.randNum=function(){
-    return Math.random() * (5 - 1) + 1;
+    return Math.floor(Math.random() * (5 - 1) + 1);
 }
 // Take one step in the animation of the game.  
 Stage.prototype.step=function(){
     for(var i=0;i<this.actors.length;i++){
         var actor = this.actors[i];
         if(actor.name ==  "monster"){
-            console.log(actor.name + " at x: " + actor.x + " y: " + actor.y );
+            //console.log(actor.name + " at x: " + actor.x + " y: " + actor.y );
             var movement;
             if((movement = this.monstermove(actor,0,1)) == true)//EAST
                 continue;
@@ -329,17 +329,18 @@ Stage.prototype.keysaction=function (e) {
     e = e || window.event;
     switch(e.keyCode){
         case 37:
+            let i = this.randNum();
             this.playeraction('W');
             break;
         case 38:
             this.playeraction('N');
             break;
         case 39:
-            alert('east');
             this.playeraction('E');
+            break;
         case 40:
             this.playeraction('S');
-
+            break;
     }
 
 
