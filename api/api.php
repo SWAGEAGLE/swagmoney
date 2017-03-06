@@ -43,7 +43,8 @@
 				$reply['username'] = $info[2];
 				$reply['email'] = $info[4];
 				$reply['gamesplayed'] = $info[5];
-				$reply['lastlogin'] = $info[6];
+				$reply['score'] = $info[6];
+				$reply['lastlogin'] = $info[7];
 
 			}
 			print json_encode($reply);
@@ -62,7 +63,7 @@
 			$username = $_REQUEST['username'];
 			$passwd =$_REQUEST['passwd'];
 			$email = $_REQUEST['email'];
-			pg_prepare($dbconn,"register","INSERT INTO test(fname,lname,username,passwd,email,numgamesplayed,lastlogin) values($1,$2,$3,$4,$5,1,null) ;");
+			pg_prepare($dbconn,"register","INSERT INTO test(fname,lname,username,passwd,email,numgamesplayed, score, lastlogin) values($1,$2,$3,$4,$5,0,1,null) ;");
 			$result = pg_execute($dbconn,"register",array($fname,$lname,$username,$passwd,$email));
 		}
 	}
