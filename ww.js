@@ -321,22 +321,29 @@ Stage.prototype.playeraction = function(direction){
 
 
 }
-/*
+
+
 //not working (keyboard navigation..trying to implement so that we don't have repeating code)
 Stage.prototype.keysaction=function (e) {
 
     e = e || window.event;
-
-    if (e.keyCode == '37') {
-        var actor = this.getActor(this.player.x ,this.player.y - 1);
-            if(actor == null)
-                this.move(this.player,0,-1,this.playerImageSrc);
-            else if(actor.name == 'box')
-                if(this.movebox(actor,0,-1))
-                    this.move(this.player,0,-1,this.playerImageSrc);;
+    switch(e.keyCode){
+        case 37:
+            this.playeraction('W');
             break;
+        case 38:
+            this.playeraction('N');
+            break;
+        case 39:
+            alert('east');
+            this.playeraction('E');
+        case 40:
+            this.playeraction('S');
+
     }
+
+
 }
-*/
+
 // End Class Stage
 

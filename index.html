@@ -23,6 +23,10 @@
             function startGame(){
                 // YOUR CODE GOES HERE
                 setInterval("stage.step()",2000);
+                document.onkeydown = function(e){
+                    stage.keysaction(e);
+                }
+                
             }
             function pauseGame(){
                 // YOUR CODE GOES HERE
