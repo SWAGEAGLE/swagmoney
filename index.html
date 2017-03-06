@@ -45,7 +45,7 @@
             <h2>Login Form</h2>
             <form method="post" name="logForm">
                 <label><b>Username</b></label>
-                <input type="text" id = "uname" placeholder="Enter Username" name="uname"/>
+                <input type="text" id = "uname" placeholder="Enter Username" name="uname" pattern="[a-zA-Z0-9]+" required/>
                 <br/><br/>
                 <label><b>Password</b></label>
                 <input type="password" id = "psw" placeholder="Enter Password" name="psw"/> 
@@ -61,16 +61,16 @@
             <h2>Registration Form</h2>
             <form method="post" name="regForm">
                 <label><b>First Name</b></label>
-                <input type="text" id="fname" placeholder="First Name" name="fname"/> 
+                <input type="text" pattern="[a-zA-Z0-9]+" id="fname" placeholder="First Name" name="fname"/> 
                 <br/><br/>
                 <label><b>Last Name</b></label>
-                <input type="text" id ="lname" placeholder="Last Name" name="lname"/> 
+                <input type="text" pattern="[a-zA-Z0-9]+" id ="lname" placeholder="Last Name" name="lname"/> 
                 <br/><br/>
                 <label><b>Username</b></label>
-                <input type="text" id = "username" placeholder="Enter Username" name="regUname"/>
+                <input type="text" pattern="[a-zA-Z0-9]+" id = "username" placeholder="Enter Username" name="regUname"/>
                 <br/><br/>
                 <label><b>Password</b></label>
-                <input type="password" id = "passwd" placeholder="Enter Password" name="regPsw"/> 
+                <input type="password" pattern="[a-zA-Z0-9]+" id = "passwd" placeholder="Enter Password" name="regPsw"/> 
                 <br/><br/>
                 <label><b>Email</b></label>
                 <input type="email" id = "email" placeholder="Enter Email" name="email"/> 

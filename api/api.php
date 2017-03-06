@@ -35,12 +35,18 @@
 			$status = (pg_num_rows($result) == 0? 'fail':'ok');
 			$reply = array();
 			//querry for the user name and database
+			$reply['status'] = $status;
 			if($status === 'ok'){
 				$info = pg_fetch_row($result);
+				$reply['firstname'] = $info[0];
+				$reply['lastname'] = $info[1];
+				$reply['username'] = $info[2];
+				$reply['email'] = $info[4];
+				$reply['gamesplayed'] = $info[5];
+				$reply['lastlogin'] = $info[6];
 
 			}
-			$reply['status'] = $status;
-			exit(json_encode($reply));
+			print json_encode($reply);
 		}
 	}
 

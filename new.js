@@ -1,26 +1,36 @@
 function toggleLogin(setup,start){
 	$(document).ready(
     	$('#log').click(function(e){
-        	e.preventDefault();
             if (logValidate() != false){
 	        	//new
 	        	//let username = $('#uname').val();
 	        	//let password = $('#psw').val();
 	        	//putAccountDetails(username,password);
-	            $('#login').hide();
-	            setup();
-	            start();
-	            $('#game').show();
-	        }
-    }))
+	        	let username = $('#uname').val();
+	        	let pass = $('#psw').val();
+				$.getJSON("api/api.php",
+					{user: username, pass: pass}, 
+					function(data){
+					if(data['status'] == 'ok'){
+						alert('heee');
+	            		$('#login').hide();
+	            		setup();
+	            		start();
+	            		$('#game').show();
+	             	}
+	             	alert('letsgo');
+    				})
+			}
+		}))	
 
-    $(document).ready(
+   	 $(document).ready(
     	$('#reg').click(function(e){
     		showHideLog(setup,start);
         	e.preventDefault();
         	$('#login').hide()
         	$('#register').show()
     }))
+
 }
 // show/hide login at registration page
 function showHideLog(setup,start){
@@ -94,17 +104,6 @@ function regValidate(){
 
 }
 
-function putAccountDetails(username,password){
-	var message = {
-		user : username,
-		pass: password
-	};
-	$.getJSON("api/api.php",message, function(data){
-		if(data['status'] == 'ok'){
-			alert('heeee');
-		}
-	})
-}
 
 function registerRequest(){
 	var params = { 
