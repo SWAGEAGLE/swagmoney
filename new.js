@@ -72,7 +72,7 @@ function regValidate(){
         return false;
 	}
 
-	if ($('#lname').val() == ""){
+	if ($('#lnameREG').val() == ""){
 		alert( "Please provide your last name!" );
         $('#lname').focus() ;
         return false;
@@ -106,6 +106,7 @@ function registerRequest(){
 	data: { "fname": $("#fnameREG").val() , "lname" : $("#lnameREG").val(), "username" : $("#usernameREG").val(),
 			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
 	};
+	alert($("#fnameREG").val());
 	$.ajax(params);
 
 }
