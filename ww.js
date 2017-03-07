@@ -9,6 +9,8 @@ class Actor{
         this.name = name;
     }
 }
+
+
 function Stage(width, height, stageElementID){
     this.actors=[]; // all actors on this stage (monsters, player, boxes, ...)
     this.player=null; // a special actor, the player
@@ -331,19 +333,31 @@ Stage.prototype.keysaction=function (e) {
 
     e = e || window.event;
     switch(e.keyCode){
-        case 37:
+        case 68:
             let i = this.randNum();
             this.playeraction('W');
             break;
-        case 38:
+        case 87:
             this.playeraction('N');
             break;
-        case 39:
+        case 65:
             this.playeraction('E');
             break;
-        case 40:
+        case 88:
             this.playeraction('S');
             break;
+        case 81:
+            this.playeraction('NW');
+            break;
+        case 69:
+            this.playeraction('NE');
+            break;
+        case 90:
+            this.playeraction('SW');
+            break;
+        case 67:
+            this.playeraction('SE');
+            break;        
     }
 
 
