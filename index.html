@@ -33,6 +33,7 @@
             $(function(){
                 //setupGame();
                 //startGame();
+                setScores();
                 toggleLogin(setupGame,startGame);
             });
 
@@ -42,7 +43,11 @@
   
     <body>
         <style>
+            body{
+                background-color:beige;
+            }
             form {
+                background-color: #FFDEAD;
                 width:25%;
                 border: 3px solid #f1f1f1;
                 border-left: 2px;
@@ -58,8 +63,7 @@
             }
 
             button {
-                background-color: #4CAF50;
-                color: white;
+                background-color: lightblue;
                 padding: 14px 20px;
                 margin: 8px 0;
                 border: none;
@@ -79,7 +83,7 @@
             }
 
             table.highscores th {
-                background-color: #4CAF50;
+                background-color: lightblue;
                 height: 50px;
             }
             
@@ -102,18 +106,10 @@
                 <button type="submit" id='reg' name="submit">Register</button>
             </form>
 
-            <table class="highscores">
+            <table id="highscores" class="highscores">
                 <tr>
                     <th>Username</th>
                     <th>Score</th>
-                </tr>
-                <tr>
-                    <td>Peter</td>
-                    <td>Griffin</td>
-                </tr>
-                <tr>
-                    <td>Lois</td>
-                    <td>Griffin</td>
                 </tr>
             </table>
         </div>

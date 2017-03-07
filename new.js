@@ -127,6 +127,16 @@ var fun = function login(user,pass,setup,start){
 function setScores(){
 	$.getJSON("api/api.php", {highscores: null},
 	function(data){
+		var table = document.getElementById("highscores");
+		var i;
+		for (i=0; i<data.length;i++){
+		    var row = table.insertRow(i+1);
+		    var cell1 = row.insertCell(0);
+		    var cell2 = row.insertCell(1);
+		    cell1.innerHTML = data[i][0];
+		    cell2.innerHTML = data[i][1];
+		}
+		
 		$('#welcomeLog').text('Welcome, '+data[0]);
     })
 }
@@ -154,8 +164,6 @@ function profile(setup,start){
             //if (regValidate() != false){
 	        	//new
 	            $('#prof').hide()
-	            setup();
-	            start();
 	            $('#game').show();
 	        //}
     }))
