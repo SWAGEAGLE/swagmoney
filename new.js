@@ -1,4 +1,5 @@
 function toggleLogin(setup,start){
+	setScores();
 	$(document).ready(
     	$('#log').click(function(e){
             if (logValidate() != false){
@@ -8,14 +9,13 @@ function toggleLogin(setup,start){
 	        	//putAccountDetails(username,password);
 	        	e.preventDefault();
 	        	profile(setup, start);
-	        	setScores();
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
 	        	fun(username,pass,setup,start);
 
 			}
 		}))	
-	
+	//FROM THE FROM FRONTPAGE TO REGISTER
    	 $(document).ready(
     	$('#reg').click(function(e){
     		showHideLog(setup,start);
@@ -52,9 +52,9 @@ function showHideLog(setup,start){
 }
 function logValidate(){
 	
-	if ($('#fname').val()== ""){
+	if ($('#uname').val()== ""){
 		alert( "Please provide your username!" );
-        $('#fname').focus();
+        $('#uname').focus();
         return false;
 	}
 
@@ -78,7 +78,7 @@ function regValidate(){
         return false;
 	}
 
-	if ($('#usernameREG') == ""){
+	if ($('#usernameREG').val() == ""){
 		alert( "Please provide your username!" );
         $('#usernameREG').focus() ;
         return false;
@@ -106,7 +106,12 @@ function registerRequest(){
 	data: { "fname": $("#fnameREG").val() , "lname" : $("#lnameREG").val(), "username" : $("#usernameREG").val(),
 			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
 	};
-	alert($("#fnameREG").val());
+	console.log($("#fnameREG").val());
+	console.log($("#lnameREG").val());
+	console.log($("#usernameREG").val());
+	console.log($("#passwdREG").val());
+	console.log($("#emailREG").val());
+	console.log($("#lnameREG").val());
 	$.ajax(params);
 
 }
