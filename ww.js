@@ -1,16 +1,8 @@
 // Stage
 // Note: Yet another way to declare a class, using .prototype.
 
-class Monster{
-    constructor(name,x,y,img){
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.img = img;
-    }
-}
 //NEED 2 NEW TYPES OF MONSTERS USING INHERITANCE
-class Player{
+class Actor{
     constructor(name,x,y){
         this.x = x;
         this.y = y;
@@ -54,7 +46,7 @@ Stage.prototype.initialize=function(){
 
     }
     // Add the player to the center of the stage
-    let player = new Player('player',Math.floor(this.width/2), Math.floor(this.height/2));
+    let player = new Actor('player',Math.floor(this.width/2), Math.floor(this.height/2));
     this.player = player;
     this.addActor(player);
     this.setImage(player.x,player.y,this.playerImageSrc);
