@@ -13,6 +13,7 @@
     switch ($method) {
   		case 'GET':
   			getUserInfo();
+  			userExists();
 			break;
  	    case 'PUT': # new item
 			break;
@@ -30,7 +31,7 @@
 		if(isset($_REQUEST['user']) && isset($_REQUEST['pass'])){
 			$user = $_REQUEST['user'];
 			$pass = $_REQUEST['pass'];
-			pg_prepare($dbconn, 'verify', 'SELECT * from test where username = $1 and passwd = $2 ;');
+			pg_prepare($dbconn, 'verify', 'SELECT * from appuser where username = $1 and passwd = $2 ;');
 			$result = pg_execute($dbconn,'verify',array($user,$pass));
 			$status = (pg_num_rows($result) == 0? 'fail':'ok');
 			$reply = array();
@@ -49,7 +50,17 @@
 			print json_encode($reply);
 		}
 	}
+	function userExists(){
+		global $dbconn;
+		if(isset($_REQUEST['user'])){
+			$user = $_REQUEST['user'];
+			pg_prepare($dbconn, 'verify', 'SELECT username from appuser where username = $1;');
+			$result = pg_execute($dbconn,'verify',array($user));
+			$status = (pg_num_rows($result) == 0? 'USER DOES NOT EXIST':'USER EXISTS');
+			print $status;
+		}
 
+	}
 	function register(){
 		global $dbconn; 
 		if(isset($_REQUEST['fname'])
@@ -62,17 +73,26 @@
 			$username = $_REQUEST['username'];
 			$passwd =$_REQUEST['passwd'];
 			$email = $_REQUEST['email'];
-			pg_prepare($dbconn,"register","INSERT INTO test(fname,lname,username,passwd,email,numgamesplayed, score, lastlogin) values($1,$2,$3,$4,$5,0,1,null) ;");
+			pg_prepare($dbconn,"register","INSERT INTO appuser(fname,lname,username,passwd,email,numgamesplayed, score, lastlogin) values($1,$2,$3,$4,$5,0,1,null) ;");
 			$result = pg_execute($dbconn,"register",array($fname,$lname,$username,$passwd,$email));
 		}
 	}
 
 	function replace(){
 		global $dbconn;
-		if(isset($_REQUEST['username'])){
-			
+		if(isset($_REQUEST['pass'])){
 			
 		}
-
 	}
+
+	function addScore(){
+		global $dbconn;
+		if(isset($_REQUEST['score']) && isset($_REQUEST['user'])){
+			$t = time();
+			$dateGo = date("Y-m-d",$t);
+			pg_prepare($dbconn,"addscore", "INSERT INTO scores(username,score,scoretime) values ($1,$2,$3) ;");
+			pg_execute($dbconn,"addscore", array($_REQUEST['user'], $_REQUEST['score'], $dateGo));
+		}
+	}
+
 ?>
