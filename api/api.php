@@ -14,6 +14,7 @@
   		case 'GET':
   			getUserInfo();
   			userExists();
+  			getHighscores();
 			break;
  	    case 'PUT': # new item
  	    	addScore();
@@ -26,7 +27,17 @@
 	}
 
 
-
+	function getHighScores(){
+		global $dbconn;
+		if(isset($_REQUEST['highscores'])){
+			$result = pg_query($dbconn,'SELECT t.score FROM scores t ORDER BY t.score DESC LIMIT 10;');
+			$scores = array();
+			$currentScore;
+			while(($currentScore = pg_fetch_array($result,null)))
+				array_push($scores,$currentScore[0]);
+			print json_encode($scores);
+		}
+	}
 	function getUserInfo(){
 		global $dbconn;
 		if(isset($_REQUEST['user']) && isset($_REQUEST['pass'])){
@@ -53,8 +64,8 @@
 	}
 	function userExists(){
 		global $dbconn;
-		if(isset($_REQUEST['user'])){
-			$user = $_REQUEST['user'];
+		if(isset($_REQUEST['usernameEXIST'])){
+			$user = $_REQUEST['usernameEXIST'];
 			pg_prepare($dbconn, 'exist', 'SELECT username from appuser where username = $1;');
 			$result = pg_execute($dbconn,'exist',array($user));
 			$status = (pg_num_rows($result) == 0? 'USER DOES NOT EXIST':'USER EXISTS');
@@ -88,11 +99,11 @@
 
 	function addScore(){
 		global $dbconn;
-		if(isset($_REQUEST['score']) && isset($_REQUEST['user'])){
+		if(isset($_REQUEST['score']) && isset($_REQUEST['usernameSCORE'])){
 			$t = time();
 			$dateGo = date("Y-m-d",$t);
 			pg_prepare($dbconn,"addscore", "INSERT INTO scores(username,score,scoretime) values ($1,$2,$3) ;");
-			pg_execute($dbconn,"addscore", array($_REQUEST['user'], $_REQUEST['score'], $dateGo));
+			pg_execute($dbconn,"addscore", array($_REQUEST['usernameSCORE'], $_REQUEST['score'], $dateGo));
 		}
 	}
 
