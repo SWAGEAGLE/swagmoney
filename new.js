@@ -4,9 +4,10 @@ function toggleLogin(setup,start){
     	$('#log').click(function(e){
             if (logValidate() != false){
 	        	e.preventDefault();
-	        	profile(setup, start);
+	        	
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
+	        	profile(username,pass,setup,start);
 	        	fun(username,pass,setup,start);
 			}
 		}))	
@@ -112,9 +113,29 @@ var fun = function login(user,pass,setup,start){
 	    setup();
 	    start();
 	    $('#game').show();
+	    $('#welcomeLog').text('Welcome, '+data['username']);
 	}
     })
 
+}
+function profUpdate(fname,lname,user,oldpasswd,newpasswd,email){
+	var params = { 
+		method: "POST", 
+		url: "api/api.php", 
+		dateType: 'json',
+		async: false,
+		success: function(data){
+			console.log(true);
+		},
+		error: function(jqXHR, exception){
+			var msg = '';
+        	if (jqXHR.status === 403){
+        		alert('Incorrect old password');
+        	}
+		},
+		data: {fname: fname,lname: lname, user: user, oldpasswd: oldpasswd, newpasswd: newpasswd, email: email} 
+	};
+	return $.ajax(params);
 }
 
 function setScores(){
@@ -129,25 +150,29 @@ function setScores(){
 		    cell1.innerHTML = data[i][0];
 		    cell2.innerHTML = data[i][1];
 		}
-		
-		$('#welcomeLog').text('Welcome, '+data[0]);
     })
 }
 
-function profile(setup,start){
+function profile(username,password,setup,start){
 	$(document).ready(
     	$('#profile').click(function(e){
         	e.preventDefault();
-        	$('#game').hide()
-        	$('#prof').show()
+        	$('#game').hide();
+        	$('#prof').show();
+        	$.getJSON("api/api.php", {user: username, pass:password},
+				function(data){
+        			document.getElementById('mfname').value=data['firstname'];
+        			document.getElementById('mlname').value=data['lastname'];
+        			document.getElementById('memail').value=data['email'];
+        		})
     }))
 
     // go back to game (back button)
 	$(document).ready(
     	$('#backGame').click(function(e){
         	e.preventDefault();
-        	$('#prof').hide()
-        	$('#game').show()
+        	$('#prof').hide();
+        	$('#game').show();
     }))
 
     // go to game (next button)
@@ -156,8 +181,19 @@ function profile(setup,start){
         	e.preventDefault();
             //if (regValidate() != false){
 	        	//new
-	            $('#prof').hide()
-	            $('#game').show();
+	        	let fname = $('#mfname').val();
+	        	let lname = $('#mlname').val();
+	        	let uname = username;
+	        	let opass = $('#oldPasswd').val();
+		        let npass = $('#newPasswd').val();
+		        let email = $('#memail').val();
+	        	profUpdate(fname,lname,uname,opass,npass,email).done(function(data){
+	        		if (data=true){
+	        			$('#prof').hide();
+        				$('#game').show();
+	        		}
+	        	})
+	            
 	        //}
     }))
 }

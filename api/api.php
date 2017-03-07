@@ -19,6 +19,7 @@
 			break;
   		case 'POST': # update to existing item
   			register();
+  			updateInfo();
 			break;
   		case 'DELETE':
 			 break;
@@ -60,6 +61,31 @@
 				else
 					header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
 			exit(json_encode($reply));
+		}
+	}
+	function updateInfo(){
+		global $dbconn;
+		if(isset($_REQUEST['user']) && isset($_REQUEST['fname']) && isset($_REQUEST['lname']) && isset($_REQUEST['oldpasswd']) && isset($_REQUEST['newpasswd']) && isset($_REQUEST['email'])){
+			$fname = $_REQUEST['fname'];
+			$lname = $_REQUEST['lname'];
+			$user = $_REQUEST['user'];
+			$opass = $_REQUEST['oldpasswd'];
+			$npass = $_REQUEST['newpasswd'];
+			$email = $_REQUEST['email'];
+			pg_prepare($dbconn, 'verifyOldPass', 'SELECT * from appuser where username = $1 and passwd = $2 ;');
+			$result = pg_execute($dbconn,'verifyOldPass',array($user,$opass));
+			$status = (pg_num_rows($result) == 0? 'fail':'ok');
+			$reply = array();
+			$reply['status'] = $status;
+			if($status === 'ok'){
+				pg_prepare($dbconn, 'updateProf', 'UPDATE appuser set fname=$1, lname=$2, passwd=$3, email=$4 where username=$5;');
+				$result = pg_execute($dbconn,'updateProf',array($fname,$lname,$npass,$email, $user));
+				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+			}
+			else{
+				header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
+			}
+			exit(json_encode($reply));	
 		}
 	}
 	function userExists(){
