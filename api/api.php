@@ -16,6 +16,7 @@
   			userExists();
 			break;
  	    case 'PUT': # new item
+ 	    	addScore();
 			break;
   		case 'POST': # update to existing item
   			register();
@@ -54,8 +55,8 @@
 		global $dbconn;
 		if(isset($_REQUEST['user'])){
 			$user = $_REQUEST['user'];
-			pg_prepare($dbconn, 'verify', 'SELECT username from appuser where username = $1;');
-			$result = pg_execute($dbconn,'verify',array($user));
+			pg_prepare($dbconn, 'exist', 'SELECT username from appuser where username = $1;');
+			$result = pg_execute($dbconn,'exist',array($user));
 			$status = (pg_num_rows($result) == 0? 'USER DOES NOT EXIST':'USER EXISTS');
 			print $status;
 		}
