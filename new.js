@@ -1,18 +1,13 @@
+//setScores();
 function toggleLogin(setup,start){
-	setScores();
 	$(document).ready(
     	$('#log').click(function(e){
             if (logValidate() != false){
-	        	//new
-	        	//let username = $('#uname').val();
-	        	//let password = $('#psw').val();
-	        	//putAccountDetails(username,password);
 	        	e.preventDefault();
 	        	profile(setup, start);
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
 	        	fun(username,pass,setup,start);
-
 			}
 		}))	
 	//FROM THE FROM FRONTPAGE TO REGISTER
@@ -106,14 +101,7 @@ function registerRequest(){
 	data: { "fname": $("#fnameREG").val() , "lname" : $("#lnameREG").val(), "username" : $("#usernameREG").val(),
 			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
 	};
-	console.log($("#fnameREG").val());
-	console.log($("#lnameREG").val());
-	console.log($("#usernameREG").val());
-	console.log($("#passwdREG").val());
-	console.log($("#emailREG").val());
-	console.log($("#lnameREG").val());
 	$.ajax(params);
-
 }
 
 var fun = function login(user,pass,setup,start){
@@ -124,7 +112,6 @@ var fun = function login(user,pass,setup,start){
 	    setup();
 	    start();
 	    $('#game').show();
-	    //	$('#welcomeLog').text('Welcome, '+data['username']);
 	}
     })
 
