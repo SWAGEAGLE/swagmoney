@@ -13,7 +13,7 @@ function toggleLogin(setup,start){
 
 			}
 		}))	
-	/*
+	
    	 $(document).ready(
     	$('#reg').click(function(e){
     		showHideLog(setup,start);
@@ -21,7 +21,7 @@ function toggleLogin(setup,start){
         	$('#login').hide()
         	$('#register').show()
 
-    }))*/
+    }))
 
 }
 // show/hide login at registration page
@@ -112,15 +112,22 @@ var fun = function login(user,pass,setup,start){
 	$.getJSON("api/api.php", {user: user,pass: pass},
 	function(data){
 	if(data['status'] == 'ok'){
-		alert('heee');
 	    $('#login').hide();
 	    setup();
 	    start();
 	    $('#game').show();
+	    $('#welcomeLog').text('Welcome, '+data['username']);
 	}
-	alert('letsgo');
     })
-	alert('wut');
 
+}
 
+function profile(){
+	// go back to login (back button)
+	$(document).ready(
+    	$('#profile').click(function(e){
+        	e.preventDefault();
+        	$('#game').hide()
+        	$('#prof').show()
+    }))
 }
