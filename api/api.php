@@ -44,7 +44,6 @@
 				$reply['email'] = $info[4];
 				$reply['gamesplayed'] = $info[5];
 				$reply['score'] = $info[6];
-				$reply['lastlogin'] = $info[7];
 
 			}
 			print json_encode($reply);
