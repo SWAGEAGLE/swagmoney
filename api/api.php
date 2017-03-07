@@ -26,7 +26,7 @@
 			 break;
 	}
 
-
+	
 	function getHighScores(){
 		global $dbconn;
 		if(isset($_REQUEST['highscores'])){

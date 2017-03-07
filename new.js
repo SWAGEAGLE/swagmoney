@@ -122,6 +122,13 @@ var fun = function login(user,pass,setup,start){
 
 }
 
+function setScores(){
+	$.getJSON("api/api.php", {highscores: null},
+	function(data){
+		console.log(data[0]);
+    })
+}
+
 function profile(){
 	// go back to login (back button)
 	$(document).ready(
