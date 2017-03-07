@@ -30,11 +30,11 @@
 	function getHighScores(){
 		global $dbconn;
 		if(isset($_REQUEST['highscores'])){
-			$result = pg_query($dbconn,'SELECT t.score FROM scores t ORDER BY t.score DESC LIMIT 10;');
+			$result = pg_query($dbconn,'SELECT t.username,t.score FROM scores t ORDER BY t.score DESC LIMIT 10;');
 			$scores = array();
 			$currentScore;
 			while(($currentScore = pg_fetch_array($result,null)))
-				array_push($scores,$currentScore[0]);
+				array_push($scores,array($currentScore[0],$currentScore[1]));
 			print json_encode($scores);
 		}
 	}
