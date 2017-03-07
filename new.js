@@ -3,12 +3,12 @@ function toggleLogin(setup,start){
 	$(document).ready(
     	$('#log').click(function(e){
             if (logValidate() != false){
-	        	e.preventDefault();
-	        	
+	        	e.preventDefault();	
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
 	        	profile(username,pass,setup,start);
 	        	fun(username,pass,setup,start);
+	        	logout();
 			}
 		}))	
 	//FROM THE FROM FRONTPAGE TO REGISTER
@@ -48,7 +48,6 @@ function showHideLog(setup,start){
     }))
 }
 function logValidate(){
-	
 	if ($('#uname').val()== ""){
 		alert( "Please provide your username!" );
         $('#uname').focus();
@@ -117,7 +116,9 @@ var fun = function login(user,pass,setup,start){
 	    $('#game').show();
 	    $('#welcomeLog').text('Welcome, '+data['username']);
 	}
+		
     })
+    .fail(function(jqXHR, textStatus, errorThrown) { alert('Invalid username/password'); })
 
 }
 function profUpdate(fname,lname,user,oldpasswd,newpasswd,email){
@@ -200,4 +201,15 @@ function profile(username,password,setup,start){
 	            
 	        //}
     }))
+}
+
+function logout(){
+	$(document).ready(
+    	$('#logout').click(function(e){
+        	e.preventDefault();
+        	$('#game').hide();
+        	$('#login').show();
+        	document.getElementById('uname').value='';
+			document.getElementById('psw').value='';
+        }))
 }
