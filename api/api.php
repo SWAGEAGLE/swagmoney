@@ -48,7 +48,7 @@
 				$reply['score'] = $info[6];
 
 			}
-			print json_encode($reply);
+			exit(json_encode($reply));
 		}
 	}
 	function userExists(){
