@@ -8,8 +8,6 @@
 	//pg_query($dbconn, "INSERT INTO test(fname, lname, username, passwd, email, numgamesplayed, lastlogin) values ('Bob', 'Smith', 'bobby', 'bob', 'bob@example.com', 0, null);");
 	//echo "hello";
 	$method = $_SERVER['REQUEST_METHOD'];
-	parse_str(file_get_contents('php://input'), $input); 
-	$reply = array();
     switch ($method) {
   		case 'GET':
   			getUserInfo();
@@ -87,7 +85,7 @@
 			$username = $_REQUEST['username'];
 			$passwd =$_REQUEST['passwd'];
 			$email = $_REQUEST['email'];
-			pg_prepare($dbconn,"register","INSERT INTO appuser(fname,lname,username,passwd,email,numgamesplayed, score, lastlogin) values($1,$2,$3,$4,$5,0,1,null) ;");
+			pg_prepare($dbconn,"register","INSERT INTO appuser(fname,lname,username,passwd,email,numgamesplayed,lastlogin) values($1,$2,$3,$4,$5,0,null) ;");
 			$result = pg_execute($dbconn,"register",array($fname,$lname,$username,$passwd,$email));
 		}
 	}
