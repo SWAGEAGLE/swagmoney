@@ -43,6 +43,7 @@ function showHideLog(setup,start){
 	            setup();
 	            start();
 	            $('#game').show();
+	            profile($('#usernameREG').val(),$('#passwdREG').val(),setup,start);
 	        }
     }))
 }
@@ -103,6 +104,7 @@ function registerRequest(){
 			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
 	};
 	$.ajax(params);
+	$('#welcomeLog').text('Welcome, '+$("#usernameREG").val());
 }
 
 var fun = function login(user,pass,setup,start){
