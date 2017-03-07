@@ -57,10 +57,10 @@
 				$reply['email'] = $info[4];
 				$reply['gamesplayed'] = $info[5];
 				$reply['score'] = $info[6];
-				header($_SERVER["SERVER_PROTOCOL"."200 OK"]);
+				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 			}
 				else
-					header($_SERVER["SERVER_PROTOCOL"."403 FORBIDDEN"]);
+					header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
 			exit(json_encode($reply));
 		}
 	}
