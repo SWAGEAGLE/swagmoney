@@ -6,6 +6,7 @@ function toggleLogin(setup,start){
 	        	//let username = $('#uname').val();
 	        	//let password = $('#psw').val();
 	        	//putAccountDetails(username,password);
+	        	e.preventDefault();
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
 	        	fun(username,pass,setup,start);

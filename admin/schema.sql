@@ -1,3 +1,5 @@
-create table test(fname varchar(20), lname varchar(20), username varchar(20), passwd varchar(20), email varchar(20), numgamesplayed int, score int, lastlogin date);
+create table appuser(fname varchar(20), lname varchar(20), username varchar(20), passwd varchar(20), email varchar(20), numgamesplayed int, lastlogin date);
 
-insert into test(fname, lname, username, passwd, email, numgamesplayed, score, lastlogin) values ('Bob', 'Smith', 'bobby', 'bob', 'bob@example.com', 1, 20, null);
+insert into appuser(fname, lname, username, passwd, email, numgamesplayed, lastlogin) values ('Bob', 'Smith', 'bobby', 'bob', 'bob@example.com', 1, null);
+create table scores(username varchar(20), score int, scoretime date);
+insert into scores (username, score, scoretime) values ('bobby', 20, null);
