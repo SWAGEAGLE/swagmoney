@@ -7,6 +7,8 @@ function toggleLogin(setup,start){
 	        	//let password = $('#psw').val();
 	        	//putAccountDetails(username,password);
 	        	e.preventDefault();
+	        	profile(setup, start);
+	        	setScores();
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
 	        	fun(username,pass,setup,start);
@@ -116,7 +118,7 @@ var fun = function login(user,pass,setup,start){
 	    setup();
 	    start();
 	    $('#game').show();
-	    $('#welcomeLog').text('Welcome, '+data['username']);
+	    //	$('#welcomeLog').text('Welcome, '+data['username']);
 	}
     })
 
@@ -125,16 +127,36 @@ var fun = function login(user,pass,setup,start){
 function setScores(){
 	$.getJSON("api/api.php", {highscores: null},
 	function(data){
-		console.log(data[0]);
+		$('#welcomeLog').text('Welcome, '+data[0]);
     })
 }
 
-function profile(){
-	// go back to login (back button)
+function profile(setup,start){
 	$(document).ready(
     	$('#profile').click(function(e){
         	e.preventDefault();
         	$('#game').hide()
         	$('#prof').show()
+    }))
+
+    // go back to game (back button)
+	$(document).ready(
+    	$('#backGame').click(function(e){
+        	e.preventDefault();
+        	$('#prof').hide()
+        	$('#game').show()
+    }))
+
+    // go to game (next button)
+    $(document).ready(
+    	$('#toGame2').click(function(e){
+        	e.preventDefault();
+            //if (regValidate() != false){
+	        	//new
+	            $('#prof').hide()
+	            setup();
+	            start();
+	            $('#game').show();
+	        //}
     }))
 }
