@@ -8,28 +8,19 @@ function toggleLogin(setup,start){
 	        	//putAccountDetails(username,password);
 	        	let username = $('#uname').val();
 	        	let pass = $('#psw').val();
-				$.getJSON("api/api.php",
-					{user: username, pass: pass}, 
-					function(data){
-					if(data['status'] == 'ok'){
-						alert('heee');
-	            		$('#login').hide();
-	            		setup();
-	            		start();
-	            		$('#game').show();
-	             	}
-	             	alert('letsgo');
-    				})
+	        	fun(username,pass,setup,start);
+
 			}
 		}))	
-
+	/*
    	 $(document).ready(
     	$('#reg').click(function(e){
     		showHideLog(setup,start);
         	e.preventDefault();
         	$('#login').hide()
         	$('#register').show()
-    }))
+
+    }))*/
 
 }
 // show/hide login at registration page
@@ -113,5 +104,22 @@ function registerRequest(){
 			"passwd" : $("#passwd").val(), "email" : $("#email").val() } 
 	};
 	$.ajax(params);
+
+}
+
+var fun = function login(user,pass,setup,start){
+	$.getJSON("api/api.php", {user: user,pass: pass},
+	function(data){
+	if(data['status'] == 'ok'){
+		alert('heee');
+	    $('#login').hide();
+	    setup();
+	    start();
+	    $('#game').show();
+	}
+	alert('letsgo');
+    })
+	alert('wut');
+
 
 }
