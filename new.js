@@ -1,4 +1,3 @@
-//setScores();
 function toggleLogin(setup,start){
 	$(document).ready(
     	$('#log').click(function(e){
@@ -8,6 +7,7 @@ function toggleLogin(setup,start){
 	        	let pass = $('#psw').val();
 	        	profile(username,pass,setup,start);
 	        	fun(username,pass,setup,start);
+	        	challenge(username);
 	        	logout();
 			}
 		}))	
@@ -104,6 +104,7 @@ function registerRequest(){
 	};
 	$.ajax(params);
 	$('#welcomeLog').text('Welcome, '+$("#usernameREG").val());
+	challenge($("#usernameREG").val());
 }
 
 var fun = function login(user,pass,setup,start){
@@ -201,6 +202,53 @@ function profile(username,password,setup,start){
 	            
 	        //}
     }))
+}
+function challenge(user){
+	$(document).ready(
+    	$('#sendChal').click(function(e){
+    		alert($("#chal").val());
+    		e.preventDefault();
+    		var dataobj={challenger: user, opponent: $("#chal").val()};
+    		var params = { 
+				method: "PUT", 
+				url: "api/api.php", 
+				dataType: 'json',
+				async: false,
+				success: function(data){
+					console.log(true);
+				},
+				error: function(jqXHR, exception){
+					var msg = '';
+		        	if (jqXHR.status === 403){
+		        		alert('User does not exist');
+		        	}
+				},
+				data: JSON.stringify(dataobj)
+			};
+			return $.ajax(params);
+    	}))
+}
+
+var startTime;
+function display(){
+	// later record end time
+    var endTime = new Date();
+
+    // time difference in ms
+    var timeDiff = endTime - startTime;
+
+    // strip the miliseconds
+    timeDiff /= 1000;
+
+    // get seconds
+    var seconds = Math.round(timeDiff % 60);
+    $("#score").text("SCORE: "+seconds);
+    setTimeout(display, 1000);
+}
+function score() {
+	// for the example we start counting at Start
+	startTime = new Date();
+  	setTimeout(display, 1000);
 }
 
 function logout(){

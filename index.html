@@ -19,7 +19,7 @@
             }
             function startGame(){
                 // YOUR CODE GOES HERE
-                
+                score();
                 setInterval("stage.step()",2000);
                 document.onkeydown = function(e){
                     stage.keysaction(e);
@@ -107,7 +107,9 @@
                 <button type="submit" id='log' name="submit">Login</button>  
                 <button type="button" id='reg' name="submit">Register</button>
             </form>
-
+            <div style="position: absolute; left: 700px; top: 0px; width: 200px; height: 60px;">
+                <h2><label class="scoresLabel">Highscores</label></h2>
+            </div>
             <table id="highscores" class="highscores">
                 <tr>
                     <th>Username</th>
@@ -214,11 +216,15 @@
                     <br>
                     <button type="submit" id='logout' name="submit">Logout</button>
                     <br></br>
-                    <h2><label id="req">Requests:</label></h2>
+                    <h2><label id="cha">Challenge:</label></h2>
                     <label><b>Enter Username to Challenge:</b></label>
-                    <input type="text" id ="chall" placeholder="Username" name="chall" />  
+                    <input type="text" id ="chal" placeholder="Username" name="chal" /> 
+                    <button type="submit" id='sendChal' name="sendChal">Challenge</button>
                 </div>
-                
+                <div class="rightSide" style="position: absolute; right: 10px; top: 80px; width: 20%;">
+                    <b><label id="score"></label><b>
+                    <h2><label id="req">Requests:</label></h2>
+                </div>
                 <center>
                     <h1>Warehouse Wars</h1>
                     <table>
