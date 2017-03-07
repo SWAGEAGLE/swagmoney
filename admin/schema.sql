@@ -3,3 +3,4 @@ create table appuser(fname varchar(20), lname varchar(20), username varchar(20),
 insert into appuser(fname, lname, username, passwd, email, numgamesplayed, lastlogin) values ('Bob', 'Smith', 'bobby', 'bob', 'bob@example.com', 1, null);
 create table scores(username varchar(20), score int, scoretime date);
 insert into scores (username, score, scoretime) values ('bobby', 20, null);
+create table challenges(challenger varchar(20), opponent varchar(20), result varchar(20));
