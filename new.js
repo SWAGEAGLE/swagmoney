@@ -161,6 +161,8 @@ function profile(username,password,setup,start){
         	$('#prof').show();
         	$.getJSON("api/api.php", {user: username, pass:password},
 				function(data){
+					document.getElementById('oldPasswd').value='';
+					document.getElementById('newPasswd').value='';
         			document.getElementById('mfname').value=data['firstname'];
         			document.getElementById('mlname').value=data['lastname'];
         			document.getElementById('memail').value=data['email'];
