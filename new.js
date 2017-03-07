@@ -52,9 +52,9 @@ function showHideLog(setup,start){
 }
 function logValidate(){
 	
-	if (document.logForm.uname.value == ""){
+	if ($('#fname').val()== ""){
 		alert( "Please provide your username!" );
-        document.logForm.uname.focus() ;
+        $('#fname').focus();
         return false;
 	}
 
@@ -66,33 +66,33 @@ function logValidate(){
 }
 function regValidate(){
 
-	if (document.regForm.fname.value == ""){
+	if ($('#fnameREG').val() == ""){
 		alert( "Please provide your first name!" );
-        document.regForm.fname.focus() ;
+        $('#fnameREG').focus() ;
         return false;
 	}
 
-	if (document.regForm.lname.value == ""){
+	if ($('#lname').val() == ""){
 		alert( "Please provide your last name!" );
-        document.regForm.lname.focus() ;
+        $('#lname').focus() ;
         return false;
 	}
 
-	if (document.regForm.regUname.value == ""){
+	if ($('#usernameREG') == ""){
 		alert( "Please provide your username!" );
-        document.regForm.regUname.focus() ;
+        $('#usernameREG').focus() ;
         return false;
 	}
 
-	if (document.regForm.regPsw.value == ""){
+	if ($("#passwdREG").val() == ""){
 		alert( "Please provide your password!" );
-        document.regForm.regPsw.focus() ;
+        $("#passwdREG").focus() ;
         return false;
 	}
 
-	if (document.regForm.email.value == ""){
+	if ($("#emailREG").val() == ""){
 		alert( "Please provide your email!" );
-        document.regForm.email.focus() ;
+        $("#emailREG").focus() ;
         return false;
 	}
 
@@ -103,8 +103,8 @@ function registerRequest(){
 	var params = { 
 	method: "POST", 
 	url: "api/api.php", 
-	data: { "fname": $("#fname").val() , "lname" : $("#lname").val(), "username" : $("#username").val(),
-			"passwd" : $("#passwd").val(), "email" : $("#email").val() } 
+	data: { "fname": $("#fnameREG").val() , "lname" : $("#lnameREG").val(), "username" : $("#usernameREG").val(),
+			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
 	};
 	$.ajax(params);
 
