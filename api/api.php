@@ -1,7 +1,7 @@
 <?php
 
 	header('Content-Type: application/json');
-	$dbconn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=master");
+	$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10559");
 	//pg_prepare($dbconn,"alias","INSERT INTO test(name,email,numGamesPlayed,lastLogin) values($1,$2,$3,$4);");
 	//pg_execute($dbconn, "alias", array("bob", "bob@mail", 3, "yesterday"));
 
