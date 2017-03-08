@@ -208,15 +208,13 @@ function challenge(user){
     	$('#sendChal').click(function(e){
     		e.preventDefault();
     		//var dataobj={challenger: user, opponent: $("#chal").val()};
-    		var params = {
-    			method: "PUT",
-    			contentType: "application/json",
-    			//dateType: 'json',
-    			URL: "api/api.php",
-    			data: {"challenger" : user, "opponent": $("#chal").val()}
-    		}
+    		var params = { 
+					method: "PUT", 
+					url: "api/api.php", 
+					data: {challenger: user, opponent: $("#chal").val()}
+				};
 
-			$.ajax(params);
+			$.ajax(params).done(alert("hi"));
     	}))
 }
 //dataType: 'json',
@@ -253,6 +251,12 @@ function score() {
 	// for the example we start counting at Start
 	startTime = new Date();
   	setTimeout(display, 1000);
+}
+function clickset(){
+
+
+
+
 }
 
 function logout(){

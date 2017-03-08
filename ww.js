@@ -99,7 +99,7 @@ Stage.prototype.initialize=function(){
     // Add some Boxes to the stage
     for (var i = 2; i < this.width ; i++){
             for (var j = 2 ; j < this.height; j++){
-                if(j % 3 == 0 && i % 7 == 0){
+                if(j == 2&& i % 2 == 0) {
                     var m = 
                         {
                         name: 'box',
@@ -111,11 +111,11 @@ Stage.prototype.initialize=function(){
                 }
             }
         }
-
+   
     // Add in some Monsters
     for (var i = 2; i < this.width ; i++){
         for (var j = 2 ; j < this.height; j++){
-            if(j % 6 == 0 && i % 4 == 0){
+            if(j % 7 == 0 && i % 6 == 0){
                 var m = 
                     {
                         name: 'monster',
