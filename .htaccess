@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Restricted Files"
 AuthUserFile /student/kathmuha/www/swagmoney/htpasswd
-Require user kathmuha wahibmos
+#Require user kathmuha
