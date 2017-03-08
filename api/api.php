@@ -18,10 +18,10 @@
 			break;
  	    case 'PUT': # new item
  	    	addScore();
+ 	    	register();
  	    	challenging();
 			break;
   		case 'POST': # update to existing item
-  			register();
   			updateInfo();
 			break;
   		case 'DELETE':
@@ -105,16 +105,17 @@
 	}
 	function register(){
 		global $dbconn; 
-		if(isset($_REQUEST['fname'])
-		    && isset($_REQUEST['lname']) 
-			&&isset($_REQUEST['username'])
-		    && isset($_REQUEST['passwd']) 
-			&& isset($_REQUEST['email'])){
-			$fname = $_REQUEST['fname'];
-			$lname = $_REQUEST['lname'];
-			$username = $_REQUEST['username'];
-			$passwd =$_REQUEST['passwd'];
-			$email = $_REQUEST['email'];
+		global $input;
+		if(isset($input['fname'])
+		    && isset($input['lname']) 
+			&&isset($input['username'])
+		    && isset($input['passwd']) 
+			&& isset($input['email'])){
+			$fname = $input['fname'];
+			$lname = $input['lname'];
+			$username = $input['username'];
+			$passwd =$input['passwd'];
+			$email = $input['email'];
 			pg_prepare($dbconn,"register","INSERT INTO appuser(fname,lname,username,passwd,email,numgamesplayed,lastlogin) values($1,$2,$3,$4,$5,0,null) ;");
 			$result = pg_execute($dbconn,"register",array($fname,$lname,$username,$passwd,$email));
 		}
@@ -129,33 +130,38 @@
 
 	function addScore(){
 		global $dbconn;
-		if(isset($_REQUEST['score']) && isset($_REQUEST['usernameSCORE'])){
-			$t = time();
-			$dateGo = date("Y-m-d",$t);
-			pg_prepare($dbconn,"addscore", "INSERT INTO scores(username,score,scoretime) values ($1,$2,$3) ;");
-			pg_execute($dbconn,"addscore", array($_REQUEST['usernameSCORE'], $_REQUEST['score'], $dateGo));
-		}
+		global $input;
+		if(!isset($input['score']) || !isset($input['usernameSCORE']))
+			return;
+		$t = time();
+		$score = $input['score'];
+		$username = $input['usernameSCORE'];
+		$dateGo = date("Y-m-d",$t);
+		pg_prepare($dbconn,"addscore", "INSERT INTO scores(username,score,scoretime) values ($1,$2,$3) ;");
+		pg_execute($dbconn,"addscore", array($username, $score, $dateGo));
 	}
 	
 	function challenging(){
 		global $dbconn;
 		global $input;
-		$challenger = $input['challenger'];
-		$opponent = $input['opponent'];
-		pg_prepare($dbconn,"challengeVerify", "SELECT * from appuser where username=$1 ;");
-		$result= pg_execute($dbconn,"challengeVerify", array($opponent));
-		$status = (pg_num_rows($result) == 0? 'fail':'ok');
-		$reply = array();
-		$reply['status'] = $status;
-		if($status === 'ok'){
-		pg_prepare($dbconn,"challenge", "INSERT INTO challenges(challenger, opponent, cscore, oscore, result) values ($1,$2,null,null,null) ;");
-		$result= pg_execute($dbconn,"challenge", array($challenger,$opponent));
-		header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
-		}
-		else{
-			header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
-		}
+		if(isset($input['challenger']) && isset($input['opponent'])){				
+			$challenger = $input['challenger'];
+			$opponent = $input['opponent'];
+			pg_prepare($dbconn,"challengeVerify", "SELECT * from appuser where username=$1 ;");
+			$result= pg_execute($dbconn,"challengeVerify", array($opponent));
+			$status = (pg_num_rows($result) == 0? 'fail':'ok');
+			$reply = array();
+			$reply['status'] = $status;
+			if($status === 'ok'){
+			pg_prepare($dbconn,"challenge", "INSERT INTO challenges(challenger, opponent, cscore, oscore, result) values ($1,$2,null,null,null) ;");
+			$result= pg_execute($dbconn,"challenge", array($challenger,$opponent));
+			header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+			}
+			else{
+				header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
+			}
 			//exit(json_encode($reply));
+		}
 	}
 	
 
