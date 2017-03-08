@@ -139,7 +139,7 @@
 		if(isset($_REQUEST['challenger']) && isset($_REQUEST['opponent'])){
 			$challenger = $_REQUEST['challenger'];
 			$opponent = $_REQUEST['opponent'];
-			pg_prepare($dbconn,"challengeVerify", "SELECT * from appuser where username=$1");
+			pg_prepare($dbconn,"challengeVerify", "SELECT * from appuser where username=$1 ;");
 			$result= pg_execute($dbconn,"challengeVerify", array($opponent));
 			$status = (pg_num_rows($result) == 0? 'fail':'ok');
 			$reply = array();
@@ -152,7 +152,7 @@
 			else{
 				header($_SERVER["SERVER_PROTOCOL"]." 403 FORBIDDEN");
 			}
-			exit(json_encode($reply));
+			//exit(json_encode($reply));
 		}
 	}
 

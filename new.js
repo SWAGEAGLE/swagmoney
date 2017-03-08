@@ -137,7 +137,7 @@ function profUpdate(fname,lname,user,oldpasswd,newpasswd,email){
         		alert('Incorrect old password');
         	}
 		},
-		data: {fname: fname,lname: lname, user: user, oldpasswd: oldpasswd, newpasswd: newpasswd, email: email} 
+		data: {"fname": fname,"lname": lname, "user": user, "oldpasswd": oldpasswd, "newpasswd": newpasswd, "email": email} 
 	};
 	return $.ajax(params);
 }
@@ -206,28 +206,32 @@ function profile(username,password,setup,start){
 function challenge(user){
 	$(document).ready(
     	$('#sendChal').click(function(e){
-    		alert($("#chal").val());
     		e.preventDefault();
-    		var dataobj={challenger: user, opponent: $("#chal").val()};
-    		var params = { 
-				method: "PUT", 
-				url: "api/api.php", 
-				dataType: 'json',
-				async: false,
+    		//var dataobj={challenger: user, opponent: $("#chal").val()};
+    		var params = {
+    			method: "PUT",
+    			contentType: "application/json",
+    			//dateType: 'json',
+    			URL: "api/api.php",
+    			data: {"challenger" : user, "opponent": $("#chal").val()}
+    		}
+
+			$.ajax(params);
+    	}))
+}
+//dataType: 'json',
+				/*
 				success: function(data){
-					console.log(true);
+					//console.log(true);
 				},
 				error: function(jqXHR, exception){
 					var msg = '';
 		        	if (jqXHR.status === 403){
 		        		alert('User does not exist');
 		        	}
-				},
-				data: JSON.stringify(dataobj)
-			};
-			return $.ajax(params);
-    	}))
-}
+				}
+				//data: JSON.stringify(dataobj)
+				*/	
 
 var startTime;
 function display(){
