@@ -1,0 +1,13 @@
+Mostafa Wahib
+wahibmos
+
+
+Muhammad Safwan Kath
+kathmuha
+1001593938
+
+-Made one smart monster
+-extra feature is where a user can challenge another
+-the user sees requests from other users for challenge
+-all validation completed
+-all outlined requirements completed
