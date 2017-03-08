@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Restricted Files"
-AuthUserFile FIX_THIS_TO_THE_FULL_PATH_TO_htpasswd
-Require user self
+AuthUserFile C:\wamp64\www\swagmoney\htpasswd
+Require user kathmuha wahibmos
