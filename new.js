@@ -97,7 +97,7 @@ function regValidate(){
 
 function registerRequest(){
 	var params = { 
-	method: "POST", 
+	method: "PUT", 
 	url: "api/api.php", 
 	data: { "fname": $("#fnameREG").val() , "lname" : $("#lnameREG").val(), "username" : $("#usernameREG").val(),
 			"passwd" : $("#passwdREG").val(), "email" : $("#emailREG").val() } 
@@ -185,7 +185,6 @@ function profile(username,password,setup,start){
     $(document).ready(
     	$('#toGame2').click(function(e){
         	e.preventDefault();
-            //if (regValidate() != false){
 	        	//new
 	        	let fname = $('#mfname').val();
 	        	let lname = $('#mlname').val();
@@ -199,8 +198,6 @@ function profile(username,password,setup,start){
         				$('#game').show();
 	        		}
 	        	})
-	            
-	        //}
     }))
 }
 function challenge(user){
@@ -217,20 +214,13 @@ function challenge(user){
 			$.ajax(params).done(alert("hi"));
     	}))
 }
-//dataType: 'json',
-				/*
-				success: function(data){
-					//console.log(true);
-				},
-				error: function(jqXHR, exception){
-					var msg = '';
-		        	if (jqXHR.status === 403){
-		        		alert('User does not exist');
-		        	}
-				}
-				//data: JSON.stringify(dataobj)
-				*/	
 
+function requests(user){
+	$.getJSON("api/api.php", {user: user},
+		function(data){
+
+		})
+}
 var startTime;
 function display(){
 	// later record end time
