@@ -229,31 +229,36 @@ function requests(user){
 		})
 }
 var startTime;
-function display(){
+var seconds;
+function display(date){
 	// later record end time
     var endTime = new Date();
 
     // time difference in ms
-    var timeDiff = endTime - startTime;
+    var timeDiff = endTime - date;
 
     // strip the miliseconds
     timeDiff /= 1000;
 
     // get seconds
-    var seconds = Math.round(timeDiff % 60);
+    seconds = Math.round(timeDiff % 60);
     $("#score").text("SCORE: "+seconds);
-    setTimeout(display, 1000);
+    //setTimeout(display(date), 1000);
 }
 function score() {
 	// for the example we start counting at Start
 	startTime = new Date();
-  	setTimeout(display, 1000);
+	//setInterval(display(),1000);
+  	display();
 }
-function clickset(){
-
-
-
-
+function setScore(){
+	var username = $('#uname').val();
+	var params = { 
+	method: "PUT", 
+	url: "api/api.php", 
+	data: {'score': seconds, 'usernameSCORE': username} 
+	};
+	$.ajax(params);
 }
 
 function logout(){

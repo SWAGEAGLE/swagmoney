@@ -19,11 +19,22 @@
             }
             function startGame(){
                 // YOUR CODE GOES HERE
-                score();
-                setInterval("stage.step()",2000);
+                var startime = new Date();
                 document.onkeydown = function(e){
                     stage.keysaction(e);
                 }
+                var interval = setInterval(function(){
+                    var keepgoing = stage.step();
+                    display(startime);
+                    if(!keepgoing){
+                        setScore();
+                        clearInterval(interval);
+                        document.onkeydown = function(e){}
+                        clearInterval(display(startime)); 
+                    }
+
+                },2000);
+                
             }
             function pauseGame(){
                 // YOUR CODE GOES HERE

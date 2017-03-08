@@ -56,7 +56,6 @@ Stage.prototype.initialize=function(){
 
     // Add walls around the outside of the stage, so actors can't leave the stage
     for (var i = 1 ; i <= this.height ; i++){
-
         var w1 = 
             {
             name: 'wall',
@@ -78,18 +77,9 @@ Stage.prototype.initialize=function(){
 
     for (var i = 1 ; i <= this.width ; i++){
         var w1 =
-            {
-            name: 'wall',
-            x : i,
-            y: 1
-            };
+            new Actor('wall',i,1);
 
-        var w2 = 
-            {
-            name: 'wall',
-            x : i,
-            y: this.height
-            };
+        var w2 = new Actor('wall',i,this.height);
         this.addActor(w1);
         this.addActor(w2)
         this.setImage(w1.x,w1.y,this.wallImageSrc);
@@ -97,36 +87,33 @@ Stage.prototype.initialize=function(){
     }
 
     // Add some Boxes to the stage
-    for (var i = 2; i < this.width ; i++){
-            for (var j = 2 ; j < this.height; j++){
-                if(j == 2&& i % 2 == 0) {
-                    var m = 
-                        {
-                        name: 'box',
-                            x : i,
-                            y: j
-                        };
-                    this.addActor(m);
-                    this.setImage(m.x,m.y,this.boxImageSrc);
-                }
-            }
-        }
-   
     // Add in some Monsters
     for (var i = 2; i < this.width ; i++){
         for (var j = 2 ; j < this.height; j++){
             if(j % 7 == 0 && i % 6 == 0){
                 var m = 
-                    {
-                        name: 'monster',
-                        x : i,
-                        y: j
-                    };
+                    new Actor('monster',i,j);
+                    
                 this.addActor(m);
                 this.setImage(m.x,m.y,this.monsterImageSrc);
             }
         }
     }
+    //FIRST SET OF BOXES
+    for (var i = 2; i < this.width ; i++){
+            for (var j = 2 ; j < this.height; j++){
+                if(j % 2== 0&& (i < 7 || i> 15) && this.getActor(i,j) == null) {
+                    var m = 
+                        new Actor('box',i,j);
+                    this.addActor(m);
+                    this.setImage(m.x,m.y,this.boxImageSrc);
+                }
+            }
+        }
+
+
+
+   
 
         
 
@@ -153,47 +140,166 @@ Stage.prototype.randNum=function(){
 }
 // Take one step in the animation of the game.  
 Stage.prototype.step=function(){
+    //MONSTERS MOVE AT RANDOM AND AROUND BOXES
+    //number of monsters, check to see if you killed all of them
+    let monstercounter = 0;
     for(var i=0;i<this.actors.length;i++){
         var actor = this.actors[i];
         if(actor.name ==  "monster"){
-            //console.log(actor.name + " at x: " + actor.x + " y: " + actor.y );
-            var movement;
+            monstercounter++;
+            let canstill = ['N','W','E','S','NE','NW','SE','SW'];
+            let movement;
+            while(true){
+                if(canstill.length == 0){
+                    this.removeMonster(actor);
+                    break;
+                }
+                let move = Math.floor((Math.random() * canstill.length));
+                let direction = canstill[move];
+                let flag = false;
+                switch(direction){
+                    case 'N':
+                         if((movement = this.monstermove(actor,1,0)) == true){
+                            flag = true;
+                            break;
+                         }
+                         if((movement == "GAME OVER")){
+                            return false;
+                         }
+                         else{
+                            canstill.splice(move,1);
+                            break
+                         }
+
+                    case 'E':
+                        if((movement = this.monstermove(actor,0,1)) == true){
+                            flag = true;
+                            break;
+                        }
+                         if((movement == "GAME OVER")){
+                            return false;
+                        }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+
+                    case 'S':
+                        if((movement = this.monstermove(actor,-1,0)) == true){
+                            flag = true;
+                            break;
+                        }
+                         if((movement == "GAME OVER")){
+                            return false;
+                        }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                    case 'W':
+                        if((movement = this.monstermove(actor,0,-1)) == true){
+                            flag = true;
+                            break;
+                        }
+                         if((movement == "GAME OVER")){
+                            return false;
+                        }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                    case 'NE':
+                        if((movement = this.monstermove(actor,1,1)) == true){
+                            flag = true;
+                            break;
+                         }
+                         if((movement == "GAME OVER")){
+                            return false;
+                         }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                    case 'NW':
+                        if((movement = this.monstermove(actor,1,-1)) == true){
+                            flag = true;
+                            break;
+                         }
+                         if((movement == "GAME OVER")){
+                            return false;
+                         }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                    case 'SE':
+                        if((movement = this.monstermove(actor,-1,1)) == true){
+                            flag = true;
+                            break;
+                         }
+                         if((movement == "GAME OVER")){
+                            return false;
+                         }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                    case 'SW':
+                        if((movement = this.monstermove(actor,-1,-1)) == true){
+                            flag = true;
+                            break;
+                        }
+                         if((movement == "GAME OVER")){
+                            return false;
+                         }
+                         else{
+                            canstill.splice(move,1);
+                            break;
+                         }
+                }
+                if(flag)
+                    break;
+
+
+            }
+            /*
             if((movement = this.monstermove(actor,0,1)) == true)//EAST
                 continue;
             if((movement == "GAME OVER"))
-                break;
+                return false;
             if((movement = this.monstermove(actor,1,0)) == true) // NORTH
                 continue;
             if((movement = this.monstermove(actor,0,-1)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break;
+                return false;
             if((movement = this.monstermove(actor,-1,0)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break
+                return false;
             if((movement = this.monstermove(actor,-1,1)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break;
+                return false;
             if((movement = this.monstermove(actor,-1,-1)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break;
+                return false;
             if((movement = this.monstermove(actor,1,-1)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break;
-            if((movement == "GAME OVER"))
-                break;
+                return false;
             if((movement = this.monstermove(actor,1,1)) == true)
                 continue;
             if((movement == "GAME OVER"))
-                break;
+                return false;;
             this.removeMonster(actor);
-
+        */
         }
     }
+    if(monstercounter == 0)
+        return false;
+    return true;
     
 }
 
@@ -211,8 +317,10 @@ Stage.prototype.monstermove = function(actor,x,y){
         return true;
     }
 
-    if(adjacent.name == 'player')
+    if(adjacent.name == 'player'){
+            this.move(actor,x,y,this.monsterImageSrc);
             return "GAME OVER";
+    }
     //if(adjacent.name == 'monster')
     //  if(this.monstermove(adjacent,x,y)){
         //  this.move(actor,x,y,this.monsterImageSrc);
@@ -334,7 +442,6 @@ Stage.prototype.keysaction=function (e) {
     e = e || window.event;
     switch(e.keyCode){
         case 68:
-            let i = this.randNum();
             this.playeraction('W');
             break;
         case 87:
