@@ -8,6 +8,7 @@ function toggleLogin(setup,start){
 	        	profile(username,pass,setup,start);
 	        	fun(username,pass,setup,start);
 	        	challenge(username);
+	        	requests(username);
 	        	logout();
 			}
 		}))	
@@ -218,7 +219,13 @@ function challenge(user){
 function requests(user){
 	$.getJSON("api/api.php", {user: user},
 		function(data){
-
+			var i;
+			for (i=0; i<data.length;i++){
+				var new1=document.getElementById('rightSide');
+				new1.innerHTML+='<label>USERNAME: '+data[i][0]+" SCORE:"+data[i][1]+'</label><br>';
+				new1.innerHTML+='<button type="submit" id="'+data[i][0]+i+'">Accept</button>';
+				new1.innerHTML+='<button type="submit" id="decline">Decline</button>';
+			}	
 		})
 }
 var startTime;

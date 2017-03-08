@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted Files"
+AuthUserFile FIX_THIS_TO_THE_FULL_PATH_TO_htpasswd
+Require user self

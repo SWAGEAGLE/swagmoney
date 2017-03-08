@@ -15,6 +15,7 @@
   			getUserInfo();
   			userExists();
   			getHighscores();
+  			playerRequests();
 			break;
  	    case 'PUT': # new item
  	    	addScore();
@@ -164,6 +165,16 @@
 		}
 	}
 	
-
+function playerRequests(){
+		global $dbconn;
+		if(isset($_REQUEST['user'])){
+			$result = pg_query_params($dbconn,'SELECT challenger, cscore FROM challenges where opponent=$1;', array($_REQUEST['user']));
+			$scores = array();
+			$currentRequest;
+			while(($currentRequest = pg_fetch_array($result,null)))
+				array_push($scores,array($currentRequest[0],$currentRequest[1]));
+			print json_encode($scores);
+		}
+	}
 
 ?>
